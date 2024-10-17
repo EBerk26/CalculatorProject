@@ -183,11 +183,21 @@ public class Calculator implements ActionListener {
                 output=input[1]-input[2];
             }
             if(operation.equals("times")){
-                output=input[1]*input[2];
+                if(outputWindow.getText().equals("*")){
+                    output=input[1]*input[1];
+                } else {
+                    output = input[1] * input[2];
+                }
             }
             if(operation.equals("divide")){
-                output=input[1]/input[2];
+                if(outputWindow.getText().equals("/")){
+                    output=Math.sqrt(input[1]);
+                } else {
+                    output = input[1] / input[2];
+                }
             }
+            output=Math.round(output*Math.pow(10,12))/Math.pow(10,12);
+
             outputWindow.setText(String.valueOf(output));
             input[1]=output;
             input[2]=0;
