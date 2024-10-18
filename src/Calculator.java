@@ -17,6 +17,7 @@ public class Calculator implements ActionListener {
     JButton decimal;
     JButton equals;
     JButton clear;
+    JButton power;
     Font oneFifthFont;
     Font oneTenthFont;
     double[] input = new double[3];
@@ -72,6 +73,8 @@ public class Calculator implements ActionListener {
                 miniMiddlePanels[x].add(numberButtons[y]);
             }
         }
+        power = new JButton("^");
+        power.addActionListener(this);
         clear = new JButton("Clear");
         clear.addActionListener(this);
         divide = new JButton("/");
@@ -85,6 +88,17 @@ public class Calculator implements ActionListener {
         decimal.addActionListener(this);
         equals = new JButton("=");
         equals.addActionListener(this);
+        changeColor(equals);
+        changeColor(decimal);
+        changeColor(plus);
+        changeColor(minus);
+        changeColor(divide);
+        changeColor(times);
+        changeColor(clear);
+        changeColor(power);
+        for(int x=0;x<=9;x++){
+            changeColor(numberButtons[x]);
+        }
 
         miniMiddlePanels[0].add(divide);
         divide.addActionListener(this);
@@ -92,6 +106,7 @@ public class Calculator implements ActionListener {
         miniMiddlePanels[2].add(minus);
         rowWith0InItRightHalf.add(decimal);
         rowWith0InItRightHalf.add(plus);
+        //miniMiddlePanels[1].add(power);
 
         rowWith0InIt.add(numberButtons[0]);
         rowWith0InIt.add(rowWith0InItRightHalf);
@@ -124,6 +139,9 @@ public class Calculator implements ActionListener {
         }
         if(operation.equals("divide")){
             operationAtFront = "/";
+        }
+        if(operation.equals("power")){
+            operationAtFront = "^";
         }
         if(e.getSource()==clear){
             input[1]=0;
@@ -175,12 +193,21 @@ public class Calculator implements ActionListener {
             operation = "divide";
             pastDecimal=-1;
         }
+        if(e.getSource()==power){
+            currentInput=2;
+            outputWindow.setText("^");
+            operation = "power";
+            pastDecimal=-1;
+        }
         if(e.getSource()==equals){
             if(operation.equals("plus")){
                 output=input[1]+input[2];
             }
             if(operation.equals("minus")){
                 output=input[1]-input[2];
+            }
+            if(operation.equals("power")){
+                output=Math.pow(input[1],input[2]);
             }
             if(operation.equals("times")){
                 if(outputWindow.getText().equals("*")){
@@ -221,5 +248,11 @@ public class Calculator implements ActionListener {
         decimal.setFont(oneTenthFont);
         equals.setFont(oneTenthFont);
         clear.setFont(oneTenthFont);
+        power.setFont(oneTenthFont);
+    }
+    void changeColor(JButton input){
+        input.setOpaque(true);
+        input.setForeground(Color.BLUE);
+        input.setBackground(Color.ORANGE);
     }
 }
