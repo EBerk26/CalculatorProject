@@ -211,16 +211,72 @@ public class OOOFirstAttempt implements ActionListener{
                     tempLength++;
                 }
             }
+            tokens = new String[tempLength];
             System.arraycopy(temp,0,tokens,0,tempLength);
-            System.out.println("break");
 
             while(tokens.length>1){
+                if(tokens[x].equals("+")){
+                    temp=new String[tokens.length-2];
+                    for(int y=0;y<=x-3;y++){
+                        temp[y]=tokens[y];
+                    }
+                    temp[x-2]=String.valueOf(Double.parseDouble(tokens[x-1])+Double.parseDouble(tokens[x-2]));
+                    if(x<tokens.length-1) {
+                        for (int y = x - 1; y < tokens.length-2; y++) {
+                            temp[y] = tokens[y + 2];
+                        }
+                    }
+                    x=0;
+                    tokens = new String[temp.length];
+                    System.arraycopy(temp,0,tokens,0,temp.length);
 
-                //x will be the place we are in the stack
-                x++;
+                } else if (tokens[x].equals("*")){
+                    temp=new String[tokens.length-2];
+                    for(int y=0;y<=x-3;y++){
+                        temp[y]=tokens[y];
+                    }
+                    temp[x-2]=String.valueOf(Double.parseDouble(tokens[x-1])*Double.parseDouble(tokens[x-2]));
+                    if(x<tokens.length-1) {
+                        for (int y = x - 1; y < tokens.length-2; y++) {
+                            temp[y] = tokens[y + 2];
+                        }
+                    }
+                    x=0;
+                    tokens = new String[temp.length];
+                    System.arraycopy(temp,0,tokens,0,temp.length);
+                } else if(tokens[x].equals("/")){
+                    temp=new String[tokens.length-2];
+                    for(int y=0;y<=x-3;y++){
+                        temp[y]=tokens[y];
+                    }
+                    temp[x-2]=String.valueOf(Double.parseDouble(tokens[x-2])/Double.parseDouble(tokens[x-1]));
+                    if(x<tokens.length-1) {
+                        for (int y = x - 1; y < tokens.length-2; y++) {
+                            temp[y] = tokens[y + 2];
+                        }
+                    }
+                    x=0;
+                    tokens = new String[temp.length];
+                    System.arraycopy(temp,0,tokens,0,temp.length);
+                } else if (tokens[x].equals("-")){
+                    temp=new String[tokens.length-2];
+                    for(int y=0;y<=x-3;y++){
+                        temp[y]=tokens[y];
+                    }
+                    temp[x-2]=String.valueOf(Double.parseDouble(tokens[x-2])-Double.parseDouble(tokens[x-1]));
+                    if(x<tokens.length-1) {
+                        for (int y = x - 1; y < tokens.length-2; y++) {
+                            temp[y] = tokens[y + 2];
+                        }
+                    }
+                    x=0;
+                    tokens = new String[temp.length];
+                    System.arraycopy(temp,0,tokens,0,temp.length);
+                } else {
+                    //x will be the place we are in the stack
+                    x++;
+                }
             }
-
-
             return tokens[0];
         }
 }
