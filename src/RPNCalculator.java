@@ -2,14 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.math.RoundingMode;
 import java.util.StringTokenizer;
 
-public class OOOFirstAttempt implements ActionListener{
+public class RPNCalculator implements ActionListener{
 
 //Instructions: https://rb.gy/3h4ruo
 
@@ -37,11 +32,11 @@ public class OOOFirstAttempt implements ActionListener{
         for (int i = 0; i < fonts.length; i++) {
             System.out.println(fonts[i]);
         }*/
-            new OOOFirstAttempt();
+            new RPNCalculator();
         }
 
-        public OOOFirstAttempt () {
-            frame = new JFrame("Order of Operations Calculator");
+        public RPNCalculator() {
+            frame = new JFrame("RPN Calculator");
             frame.setSize(400,400);
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -160,7 +155,11 @@ public class OOOFirstAttempt implements ActionListener{
                 type(" ");
             }
             if(e.getSource()==equals){
-                inputString=calculateString(inputString);
+                try {
+                    inputString = calculateRPN(inputString);
+                } catch(Exception exception){
+                    outputWindow.setText("Error");
+                }
             }
 
             outputWindow.setText(inputString);
@@ -192,7 +191,7 @@ public class OOOFirstAttempt implements ActionListener{
         void type(int x){
             inputString=inputString+String.valueOf(x);
         }
-        String calculateString(String equation){
+        static String calculateRPN(String equation){
             //evaluates the string using RPN
             StringTokenizer st = new StringTokenizer(equation,"+/*- ",true);
             String[] tokens = new String[st.countTokens()];
