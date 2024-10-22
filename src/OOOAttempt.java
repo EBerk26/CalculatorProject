@@ -8,7 +8,7 @@ public class OOOAttempt {
 
     public OOOAttempt() {
     try {
-            System.out.println(evaluate(""));
+            System.out.println(evaluate("1-2"));
         } catch (Exception e) {
             if(e.equals(ParenthesesImbalance)){
                 System.out.println("The numbers of open and closed parentheses differ.");
@@ -81,14 +81,26 @@ public class OOOAttempt {
             tokens = new String[temp.length];
             System.arraycopy(temp, 0, tokens, 0, temp.length);
 
+        } else{
+            String stringify = "";
+            for (int x = 0; x < tokens.length; x++) {
+                stringify = stringify + tokens[x];
+            }
+            if((input.contains("*")||input.contains("/"))&&(input.contains("+")||input.contains("-"))){
+                return (evaluate(ParenthesizeMultiplication.parenthesize(stringify)));
+            } else{
+                return LtoROperations.simpletoRPNConverter(stringify);
+            }
+            //if there are no brackets, parenthesize multiplication
         }
             String stringify = "";
             for (int x = 0; x < tokens.length; x++) {
                 stringify = stringify + tokens[x];
             }
-            if(countCharacter(stringify, '(')>0){
-                return evaluate(stringify);
-            } else return RPNCalculator.calculateRPN(stringify);
+            hasBrackets = countCharacter(stringify, '(') + countCharacter(stringify, ')') != 0;
+        if(hasBrackets){
+                return evaluate(ParenthesizeMultiplication.parenthesize(stringify));
+        } else return LtoROperations.simpletoRPNConverter(stringify);
 
     }
         int countCharacter (String source,char characterToCount){
@@ -100,4 +112,11 @@ public class OOOAttempt {
             }
             return count;
         }
+
+
+        /*
+        1. Handle parentheses
+        2. parenthesize multiplication if there's no parentheses, sending it back through the whole method
+        3. if there are no parentheses, evaluate left to right.
+         */
 }
