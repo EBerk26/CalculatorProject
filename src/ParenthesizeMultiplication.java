@@ -7,7 +7,7 @@ public class ParenthesizeMultiplication {
     }
     public ParenthesizeMultiplication() {
         try {
-            System.out.println(parenthesize("2*3+3"));
+            System.out.println(parenthesize(""));
             System.out.println(parenthesize("1+2*3"));
             System.out.println(parenthesize("2*3+3*4"));
         } catch (Exception e) {

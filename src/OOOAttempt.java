@@ -7,8 +7,13 @@ public class OOOAttempt {
 
 
     public OOOAttempt() {
-    try {
-            System.out.println(evaluate("1-2"));
+        try {
+            String output = evaluate("5 + (6 * 2) - (8 / 4) + 3");
+            if(output.charAt(0)=='|'){
+                System.out.println("-"+output.substring(1));
+            } else {
+                System.out.println(output);
+            }
         } catch (Exception e) {
             if(e.equals(ParenthesesImbalance)){
                 System.out.println("The numbers of open and closed parentheses differ.");
@@ -80,38 +85,32 @@ public class OOOAttempt {
             }
             tokens = new String[temp.length];
             System.arraycopy(temp, 0, tokens, 0, temp.length);
-
-        } else{
-            String stringify = "";
-            for (int x = 0; x < tokens.length; x++) {
-                stringify = stringify + tokens[x];
-            }
+        }
+        String stringify = "";
+        for (int x = 0; x < tokens.length; x++) {
+            stringify = stringify + tokens[x];
+        }
+        hasBrackets = countCharacter(stringify, '(') + countCharacter(stringify, ')') != 0;
+        if(hasBrackets){
+            return evaluate(stringify);
+        } else {
             if((input.contains("*")||input.contains("/"))&&(input.contains("+")||input.contains("-"))){
                 return (evaluate(ParenthesizeMultiplication.parenthesize(stringify)));
             } else{
                 return LtoROperations.simpletoRPNConverter(stringify);
             }
-            //if there are no brackets, parenthesize multiplication
         }
-            String stringify = "";
-            for (int x = 0; x < tokens.length; x++) {
-                stringify = stringify + tokens[x];
-            }
-            hasBrackets = countCharacter(stringify, '(') + countCharacter(stringify, ')') != 0;
-        if(hasBrackets){
-                return evaluate(ParenthesizeMultiplication.parenthesize(stringify));
-        } else return LtoROperations.simpletoRPNConverter(stringify);
 
     }
-        int countCharacter (String source,char characterToCount){
-            int count = 0;
-            for (int x = 0; x < source.length(); x++) {
-                if (source.charAt(x) == characterToCount) {
-                    count++;
-                }
+    int countCharacter (String source,char characterToCount){
+        int count = 0;
+        for (int x = 0; x < source.length(); x++) {
+            if (source.charAt(x) == characterToCount) {
+                count++;
             }
-            return count;
         }
+        return count;
+    }
 
 
         /*
