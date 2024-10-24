@@ -6,7 +6,7 @@ import java.math.RoundingMode;
 
 //Instructions: https://rb.gy/3h4ruo
 
-public class Calculator implements ActionListener {
+public class PlainCalculator implements ActionListener {
     JButton[] numberButtons;
     JFrame frame;
     JLabel outputWindow;
@@ -35,10 +35,10 @@ public class Calculator implements ActionListener {
         for (int i = 0; i < fonts.length; i++) {
             System.out.println(fonts[i]);
         }*/
-        new Calculator();
+        new PlainCalculator();
     }
 
-    public Calculator () {
+    public PlainCalculator () {
         frame = new JFrame("Calculator");
         frame.setSize(400,400);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -57,9 +57,8 @@ public class Calculator implements ActionListener {
             miniMiddlePanels[x] = new JPanel(new GridLayout(1,4));
             backPanel.add(miniMiddlePanels[x]);
         }
-        JPanel rowWith0InIt = new JPanel(new GridLayout(1,2));
+        JPanel rowWith0InIt = new JPanel(new GridLayout(1,4));
         JPanel bottomMiniPanel = new JPanel(new BorderLayout());
-        JPanel rowWith0InItRightHalf = new JPanel (new GridLayout(1,2));
         backPanel.add(rowWith0InIt);
         backPanel.add(bottomMiniPanel);
         numberButtons = new JButton[10];
@@ -104,12 +103,13 @@ public class Calculator implements ActionListener {
         divide.addActionListener(this);
         miniMiddlePanels[1].add(times);
         miniMiddlePanels[2].add(minus);
-        rowWith0InItRightHalf.add(decimal);
-        rowWith0InItRightHalf.add(plus);
+
         //miniMiddlePanels[1].add(power);
 
         rowWith0InIt.add(numberButtons[0]);
-        rowWith0InIt.add(rowWith0InItRightHalf);
+        rowWith0InIt.add(decimal);
+        rowWith0InIt.add(power);
+        rowWith0InIt.add(plus);
         bottomMiniPanel.add(equals);
         bottomMiniPanel.add(clear,BorderLayout.WEST);
         ChangeFontSizes();

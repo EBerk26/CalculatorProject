@@ -1,14 +1,14 @@
 import java.util.StringTokenizer;
 
-public class OOOAttempt {
-    Exception ParenthesesImbalance = new Exception();
-    Exception misalignedParentheses = new Exception();
+public class OOOEvaluator {
+    static Exception ParenthesesImbalance = new Exception();
+    static Exception misalignedParentheses = new Exception();
 
 
 
-    public OOOAttempt() {
+    public OOOEvaluator() {
         try {
-            String output = evaluate("5 + (6 * 2) - (8 / 4) + 3");
+            String output = evaluate("-12*(-11)");
             if(output.charAt(0)=='|'){
                 System.out.println("-"+output.substring(1));
             } else {
@@ -29,10 +29,13 @@ public class OOOAttempt {
     }
 
     public static void main(String[] args) {
-        new OOOAttempt();
+        new OOOEvaluator();
     }
 
-    String evaluate(String input) throws Exception {
+    static String evaluate(String input) throws Exception {
+        if(input.charAt(0)=='-'){
+            return(evaluate("0"+input));
+        }
         String[] temp;
         boolean hasBrackets;
         StringTokenizer st = new StringTokenizer(input, "()", true);
@@ -102,7 +105,7 @@ public class OOOAttempt {
         }
 
     }
-    int countCharacter (String source,char characterToCount){
+    static int countCharacter (String source,char characterToCount){
         int count = 0;
         for (int x = 0; x < source.length(); x++) {
             if (source.charAt(x) == characterToCount) {

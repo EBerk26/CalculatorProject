@@ -32,7 +32,7 @@ public class RPNCalculator implements ActionListener{
         for (int i = 0; i < fonts.length; i++) {
             System.out.println(fonts[i]);
         }*/
-        new RPNCalculator();
+       new RPNCalculator();
     }
 
     public RPNCalculator() {
