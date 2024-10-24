@@ -104,7 +104,6 @@ public class PlainCalculator implements ActionListener {
         miniMiddlePanels[1].add(times);
         miniMiddlePanels[2].add(minus);
 
-        //miniMiddlePanels[1].add(power);
 
         rowWith0InIt.add(numberButtons[0]);
         rowWith0InIt.add(decimal);

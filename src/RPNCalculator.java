@@ -54,9 +54,8 @@ public class RPNCalculator implements ActionListener{
             miniMiddlePanels[x] = new JPanel(new GridLayout(1,4));
             backPanel.add(miniMiddlePanels[x]);
         }
-        JPanel rowWith0InIt = new JPanel(new GridLayout(1,2));
+        JPanel rowWith0InIt = new JPanel(new GridLayout(1,4));
         JPanel bottomMiniPanel = new JPanel(new BorderLayout());
-        JPanel rowWith0InItRightHalf = new JPanel (new GridLayout(1,2));
         backPanel.add(rowWith0InIt);
         backPanel.add(bottomMiniPanel);
         numberButtons = new JButton[10];
@@ -104,12 +103,11 @@ public class RPNCalculator implements ActionListener{
         divide.addActionListener(this);
         miniMiddlePanels[1].add(times);
         miniMiddlePanels[2].add(minus);
-        rowWith0InItRightHalf.add(space); //TODO change this back to decimal when possible
-        rowWith0InItRightHalf.add(plus);
-        //miniMiddlePanels[1].add(power);
-
+        rowWith0InIt.add(space);
         rowWith0InIt.add(numberButtons[0]);
-        rowWith0InIt.add(rowWith0InItRightHalf);
+        rowWith0InIt.add(decimal);
+        rowWith0InIt.add(plus);
+
         bottomMiniPanel.add(equals);
         bottomMiniPanel.add(clear,BorderLayout.WEST);
         ChangeFontSizes();
